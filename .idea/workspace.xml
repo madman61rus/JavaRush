@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49e868cb-6c28-469e-9a04-9674b5bddb2b" name="Default" comment="lavel 15">
+    <list default="true" id="49e868cb-6c28-469e-9a04-9674b5bddb2b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JavaRushHomeWork.iws" />
@@ -903,7 +903,7 @@
       <workItem from="1478779629741" duration="23000" />
       <workItem from="1478850318779" duration="13031000" />
       <workItem from="1479103410459" duration="4454000" />
-      <workItem from="1479228043266" duration="10394000" />
+      <workItem from="1479228043266" duration="10416000" />
     </task>
     <task id="LOCAL-00001" summary="second test commit">
       <created>1479117530522</created>
@@ -926,11 +926,18 @@
       <option name="project" value="LOCAL" />
       <updated>1479247269517</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="lavel 15">
+      <created>1479247355962</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1479247355962</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239932000" />
+    <option name="totallyTimeSpent" value="239954000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="996" extended-state="6" />
