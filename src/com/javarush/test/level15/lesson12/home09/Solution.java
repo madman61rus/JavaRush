@@ -1,5 +1,7 @@
 package com.javarush.test.level15.lesson12.home09;
 
+import java.util.Scanner;
+
 /* Парсер реквестов
 Считать с консоли URl ссылку.
 Вывести на экран через пробел список всех параметров (Параметры идут после ? и разделяются &, например, lvl=15).
@@ -23,59 +25,41 @@ double 3.14
 */
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        String[] params = line.substring(line.indexOf("?")+1,line.length()).split("&");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String line = "" ;
-
-        try
+        for (String str : params )
         {
-            line = reader.readLine();
 
-        }catch (IOException e)
-        {
-            System.out.println(e);
-        }
-
-        String param = line.substring(line.indexOf('?')+1,line.length()-1);
-        String[] splitedParameters = param.split("&");
-
-        for (String str :splitedParameters
-                )
-        {
-            if (!str.contains("obj"))
+            if (str.contains("="))
             {
-                if (str.contains("="))
-                {
-                    System.out.print(str.substring(0, str.indexOf("="))+ " ");
-                } else
-                {
-                    System.out.print(str + " ");
-                }
+                System.out.print(str.substring(0,str.indexOf('=')) + " ");
+
+            }else if (!str.substring(0,3).equals("obj") )
+            {
+                System.out.print(str + " ");
             }
+
         }
 
-            System.out.println();
+        System.out.println();
 
-        for (String str :splitedParameters
-             )
+        for (String str : params )
         {
-            if (str.contains("obj") && str.contains("."))
+            if (str.substring(0,3).equals("obj") & str.matches(".*\\d+.*"))
             {
                 alert(Double.parseDouble(str.substring(str.indexOf('=')+1,str.length())));
 
-            }else if (str.contains("obj") && !str.contains("."))
-            {
+            }else if (str.substring(0,3).equals("obj") & !str.matches(".*\\d+.*")){
                 alert(str.substring(str.indexOf('=')+1,str.length()));
             }
-
         }
+
+
 
     }
 
