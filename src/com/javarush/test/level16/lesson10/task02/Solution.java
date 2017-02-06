@@ -11,59 +11,38 @@ package com.javarush.test.level16.lesson10.task02;
 PS: метод sleep выбрасывает InterruptedException.
 */
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import javax.swing.table.TableRowSorter;
+import java.util.Date;
 
 public class Solution {
     public static volatile int countSeconds = 4;
 
     public static void main(String[] args) throws InterruptedException {
         RacingClock clock = new RacingClock();
-
+        Thread.sleep(3500);
+        clock.interrupt();
 
     }
 
     public static class RacingClock extends Thread {
-        private long startTime = System.currentTimeMillis() ;
+        Date startTime = new Date();
+        private long different = 0 ;
 
         public RacingClock() {
             start();
         }
 
         public void run() {
-            System.out.print("[");
-            while (!Thread.currentThread().isInterrupted())
-            {
-                if ((System.currentTimeMillis() - startTime) >= 3500)
-                {
-                    System.out.print("Прервано!]");
-                    Thread.currentThread().interrupt();
-                    break;
+
+            try {
+                while(countSeconds > 0){
+                    System.out.print(countSeconds + " ");
+                    Thread.sleep(1000);
+                    countSeconds--;
                 }
-
-                 if (countSeconds > 0)
-                 {
-
-                     try
-                     {
-                         System.out.print(countSeconds + " ");
-                         Thread.sleep(1000);
-                     }
-                     catch (InterruptedException e)
-                     {
-                         e.printStackTrace();
-                     }
-                     countSeconds--;
-                 }
-                 else
-                 {
-                     System.out.print("Марш!]");
-                     break;
-                 }
-
-
-
-
+                System.out.print("Марш!");
+            }
+            catch (InterruptedException e) {
+                System.out.print("Прервано!");
             }
 
         }

@@ -37,22 +37,8 @@ public class Solution
     public static Map<String, Integer> countWords(ArrayList<String> list)
     {
         HashMap<String, Integer> result = new HashMap<String, Integer>();
-        int counter = 1;
 
-        for (int i=0; i<list.size()-1;i++){
-
-            for (int y=i+1; y < list.size()-1; y++)
-            {
-                if (list.get(i).toLowerCase().equals(list.get(y).toLowerCase())) counter++;
-            }
-
-            if (!result.containsKey(list.get(i).toLowerCase())){
-                result.put(list.get(i).toLowerCase(),counter);
-
-            }
-
-            counter = 1;
-        }
+        //напишите тут ваш код
 
 
         return result;

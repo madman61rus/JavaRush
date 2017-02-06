@@ -1,6 +1,7 @@
 package com.javarush.test.level17.lesson10.home01;
 
 import java.util.*;
+import java.util.List;
 
 /* Общий список
 1. Изменить класс Solution так, чтобы он стал списком. (Необходимо реализовать интерфейс java.util.List).
@@ -9,9 +10,8 @@ import java.util.*;
 4. Список будет использоваться нитями, поэтому позаботьтесь, чтобы все методы были синхронизированы.
 */
 
-public class Solution implements List<Long> {
+public class Solution extends Thread implements List<Long> {
     private ArrayList<Long> original = new ArrayList<Long>();
-
 
     @Override
     public synchronized int size()
@@ -25,7 +25,6 @@ public class Solution implements List<Long> {
         return original.isEmpty();
     }
 
-
     @Override
     public synchronized boolean contains(Object o)
     {
@@ -33,22 +32,17 @@ public class Solution implements List<Long> {
     }
 
     @Override
-    public synchronized Iterator<Long> iterator()
+    public synchronized Iterator iterator()
     {
         return original.iterator();
     }
 
     @Override
-    public synchronized Object[] toArray()
+    public Object[] toArray()
     {
         return original.toArray();
     }
 
-    @Override
-    public synchronized <Long> Long[] toArray(Long[] a)
-    {
-        return (Long[]) original.toArray();
-    }
 
     @Override
     public synchronized boolean add(Long aLong)
@@ -57,40 +51,24 @@ public class Solution implements List<Long> {
     }
 
 
+
     @Override
     public synchronized boolean remove(Object o)
     {
-        return original.remove(o);
+        return  original.remove(o);
+
     }
 
     @Override
-    public synchronized boolean containsAll(Collection<?> c)
-    {
-        return original.containsAll(c);
-    }
-
-    @Override
-    public synchronized boolean addAll(Collection<? extends Long> c)
+    public synchronized boolean addAll(Collection c)
     {
         return original.addAll(c);
     }
 
     @Override
-    public synchronized boolean addAll(int index, Collection<? extends Long> c)
+    public synchronized boolean addAll(int index, Collection c)
     {
-        return addAll(index,c);
-    }
-
-    @Override
-    public synchronized boolean removeAll(Collection<?> c)
-    {
-        return original.removeAll(c);
-    }
-
-    @Override
-    public synchronized  boolean retainAll(Collection<?> c)
-    {
-        return retainAll(c);
+        return original.addAll(index,c);
     }
 
     @Override
@@ -106,7 +84,7 @@ public class Solution implements List<Long> {
     }
 
     @Override
-    public synchronized  Long set(int index, Long element)
+    public synchronized Long set(int index, Long element)
     {
         return original.set(index,element);
     }
@@ -117,6 +95,7 @@ public class Solution implements List<Long> {
         original.add(index,element);
     }
 
+
     @Override
     public synchronized Long remove(int index)
     {
@@ -126,30 +105,54 @@ public class Solution implements List<Long> {
     @Override
     public synchronized int indexOf(Object o)
     {
-        return original.indexOf(o);
+        return original.indexOf((Long) o);
     }
 
     @Override
     public synchronized int lastIndexOf(Object o)
     {
-        return original.lastIndexOf(o);
+        return original.lastIndexOf((Long) o);
     }
 
     @Override
-    public synchronized ListIterator<Long> listIterator()
+    public synchronized ListIterator listIterator()
     {
         return original.listIterator();
     }
 
     @Override
-    public synchronized ListIterator<Long> listIterator(int index)
+    public synchronized ListIterator listIterator(int index)
     {
         return original.listIterator(index);
     }
 
     @Override
-    public synchronized List<Long> subList(int fromIndex, int toIndex)
+    public synchronized List subList(int fromIndex, int toIndex)
     {
-        return original.subList(fromIndex, toIndex);
+        return original.subList(fromIndex,toIndex);
+    }
+
+    @Override
+    public synchronized boolean retainAll(Collection c)
+    {
+        return original.retainAll(c);
+    }
+
+    @Override
+    public synchronized boolean removeAll(Collection c)
+    {
+        return original.retainAll(c);
+    }
+
+    @Override
+    public synchronized boolean containsAll(Collection c)
+    {
+        return original.containsAll(c);
+    }
+
+    @Override
+    public synchronized Object[] toArray(Object[] a)
+    {
+        return original.toArray(a);
     }
 }

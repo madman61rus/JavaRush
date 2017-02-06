@@ -1,16 +1,12 @@
 package com.javarush.test.level15.lesson12.bonus01;
 
-import com.javarush.test.level15.lesson12.home10.Helicopter;
-import com.javarush.test.level15.lesson12.home10.Plane;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 /* Осваивание статического блока
 1. В отдельных файлах создать классы Plane и Helicopter, реализующие интерфейс Flyable.
-2. Класс Plane должен иметь 1 конструктор с параметром int - количество перевозимых пассажиров.
+2. Класс Plane должен иметь 1 конструктор с параметром int - -оличество перевозимых пассажиров.
 3. В статическом методе reset класса Solution:
 3.1. Считать с консоли параметр типа String. Параметр может быть "plane" или "helicopter".
 3.2. Если параметр равен "helicopter", то статическому объекту Flyable result присвоить объект класса Helicopter.
@@ -24,30 +20,49 @@ public class Solution {
         try
         {
             reset();
+        }catch (Exception e){
+
+
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     public static Flyable result;
 
-    public static void reset() throws IOException
-    {
+    public static void reset() {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String param = reader.readLine();
 
-        if (param.equals("helicopter"))
+        try
         {
-            result = new Helicopter();
-        }else if (param.equals("plane"))
+            String parameter = reader.readLine();
+
+            if (parameter.equals("helicopter"))
+            {
+                result = new Helicopter();
+            }else if (parameter.equals("plane"))
+            {
+                int seats = Integer.parseInt(reader.readLine());
+                result = new Plane(seats);
+            }
+
+
+
+        }catch (IOException e)
         {
-            int count = Integer.parseInt(reader.readLine());
-            result = new Plane(count);
+
         }
 
-        reader.close();
+        try
+        {
+            reader.close();
+
+        }catch (IOException e)
+        {
+
+        }
+
+
+
     }
 }

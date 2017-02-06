@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 сын Мурчик
 дочь Пушинка
 
+
 Пример вывода:
 Cat name is дедушка Вася, no mother, no father
 Cat name is бабушка Мурка, no mother, no father
@@ -33,39 +34,61 @@ public class Solution
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+        String grandFotherName = reader.readLine();
+        Cat grandFother = new Cat(grandFotherName);
+
+        String grandMotherName = reader.readLine();
+        Cat grandMother = new Cat(grandMotherName);
+
+        String FotherName = reader.readLine();
+        Cat catFother = new Cat(FotherName,grandFother,null);
+
         String motherName = reader.readLine();
-        Cat catMother = new Cat(motherName);
+        Cat catMother = new Cat(motherName,null,grandMother);
+
+        String sonName = reader.readLine();
+        Cat catSon = new Cat(sonName,catFother,catMother);
 
         String daughterName = reader.readLine();
-        Cat catDaughter = new Cat(daughterName, catMother);
+        Cat catDaughter = new Cat(daughterName,catFother, catMother);
 
+        System.out.println(grandFother);
+        System.out.println(grandMother);
+        System.out.println(catFother);
         System.out.println(catMother);
+        System.out.println(catSon);
         System.out.println(catDaughter);
     }
 
     public static class Cat
     {
         private String name;
-        private Cat parent;
+        private Cat mother;
+        private Cat fother;
 
         Cat(String name)
         {
             this.name = name;
         }
 
-        Cat(String name, Cat parent)
+        Cat(String name, Cat fother, Cat mother)
         {
             this.name = name;
-            this.parent = parent;
+            this.mother = mother;
+            this.fother = fother;
         }
 
         @Override
         public String toString()
         {
-            if (parent == null)
-                return "Cat name is " + name + ", no mother ";
+            if (this.mother == null && this.fother == null)
+                return "Cat name is " + name + ", no mother" + ", no father";
+            else if (this.mother == null && this.fother != null)
+                return "Cat name is " + name + ", no mother" + ", father is " + fother.name;
+            else if (this.mother != null && this.fother == null )
+                return "Cat name is " + name + ", mother is " + mother.name + ", no father";
             else
-                return "Cat name is " + name + ", mother is " + parent.name;
+                return "Cat name is " + name + ", mother is " + mother.name + ", father is " + fother.name;
         }
     }
 
