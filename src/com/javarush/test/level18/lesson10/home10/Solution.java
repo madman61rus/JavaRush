@@ -11,9 +11,9 @@ package com.javarush.test.level18.lesson10.home10;
 Закрыть потоки. Не использовать try-with-resources
 */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Solution {
@@ -22,14 +22,38 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String fileName = "" ;
         Map<Integer,String> files = new TreeMap<Integer,String>();
+        Path path = null ;
 
         while ( !(fileName = reader.readLine()).equals("end") )
         {
             String index = fileName.split("\\.")[2].replace("part","");
             Integer number = Integer.parseInt(index);
             files.put(number,fileName);
+            path = Paths.get(fileName);
         }
 
-        System.out.println(files);
+        reader.close();
+
+        String newPath = path.getParent().toString() ;
+        String newFileName = path.getFileName().toString().split("\\.")[0];
+        newFileName += "." + path.getFileName().toString().split("\\.")[1];
+
+        BufferedInputStream fileReader = null;
+        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(path.getParent().resolve(newFileName).toString(),true));
+
+
+        for (Map.Entry<Integer,String> entry : files.entrySet())
+        {
+            fileReader = new BufferedInputStream(new FileInputStream(entry.getValue()));
+            while ( fileReader.available() > 0)
+            {
+                outputStream.write(fileReader.read());
+            }
+        }
+
+        fileReader.close();
+        outputStream.close();
+
+
     }
 }
